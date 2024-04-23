@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+
+<!--Customer List view
+    Takes in the list of customers using the model attribute in the controller in order to bind them to the form
+    theModel.addAttribute("customer", theCustomer) in the controller
+    $"{customer}" in the html form
+    -->
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+    <title>Customer List</title>
+
+    <link href="assets/img/swiftFavicon.png" rel="icon">
+</head>
+<body>
+
+<div class="container">
+    <br>
+    <h3 class="card-title">Customers</h3>
+    <br>
+    <!--button to add a customer -->
+    <a th:href="@{/customers/newCustomerForm}" class="btn-primary btn-sm mb-3">Add Customer</a>
+
+    <!--Using the same table as prospects for now -->
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+        <tr>
+            <th>Company Name</th>
+            <th>Company Number</th>
+            <th>Address</th>
+            <th>Decision Maker</th>
+            <th>Previous Courier</th>
+           <!--
+            <th>CIPC Docs</th>
+            <th>Credit App</th>
+            -->
+            <th>Open Invoices</th>
+            <th>Open Invoice Value 'R'</th>
+            <th>Current Month Billing 'R'</th>
+            <th>Notes</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tempCustomer : ${customer}">
+                <td th:text="${tempCustomer.companyName}"/>
+                <td th:text="${tempCustomer.companyNumber}"/>
+                <td th:text="${tempCustomer.address}"/>
+                <td th:text="${tempCustomer.decisionMaker}"/>
+                <td th:text="${tempCustomer.previousCourier}"/>
+                <td th:text="${tempCustomer.openInvoices}"/>
+                <td th:text="${tempCustomer.openInvoiceValue}"/>
+                <td th:text="${tempCustomer.currentInvoiceValue}"/>
+                <td th:text="${tempCustomer.notes}"/>
+
+            <td>
+            <a th:href="@{/customers/updateCustomer(customerId=${tempCustomer.id})}" class="btn btn-info btn-sm">Update</a>
+            <a th:href="@{/customers/deleteCustomer(customerId=${tempCustomer.id})}" class="btn btn-danger btn-sm"
+            onclick="if(!(confirm('Are you sure you want to delete this Customer?'))) return false">Delete</a>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+    <hr>
+    <a th:href="@{/dashboard}">Back to Dashboard</a>
+    <hr>
+
+</div>
+
+</body>
+</html>
