@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+
+<!--Add Customer View
+     getter methods are called when the form is loaded
+     setter methods are then called when the form is submitted-->
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Targets</title>
+
+
+    <script th:replace="fragments/header :: headerElement"></script>
+    <script th:replace="fragments/navbar :: navbarElement"></script>
+    <!--Footer needs to be redesigned
+    <script th:replace="fragments/footer :: footerElement"></script>
+    -->
+
+</head>
+<body>
+
+<div class="container">
+
+    <h3>Customer Targets</h3>
+    <hr>
+
+    <p class="h4 mb-4">Customer Targets</p>
+
+    <form action="#" th:action="@{/customers/save}" th:object="${customer}" method="POST">     <!-- enctype="multipart/form-data"> -->
+        <!--Hidden field is required for update. Tells the system which employee to update -->
+
+        <input type="text" th:field="*{targetShipments}"
+               class="form-control mb-4 w-25" placeholder="Target Shipments">
+
+        <input type="number" th:field="*{targetCustomers}"
+               class="form-control mb-4 w-25" placeholder="Target Customers">
+
+        <input type="text" th:field="*{targetRevenue}"
+               class="form-control mb-4 w-25" placeholder="Target Revenue">
+
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/customers/list}">Back to Customer List</a>
+    <hr>
+
+
+</div>
+
+</body>
+
+</html>
