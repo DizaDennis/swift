@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"  lang="en">
+<head>
+
+    <title>Services</title>
+    <script th:replace="fragments/header :: headerElement"></script>
+    <script th:replace="fragments/navbar :: navbarElement"></script>
+    <!--Footer needs to be redesigned
+    <script th:replace="fragments/footer :: footerElement"></script>
+    -->
+
+
+</head>
+
+<body>
+
+<div class="container">
+    <br>
+    <h3 class="card-title"> Services</h3>
+    <br>
+
+    <a th:href="@{/courierServices/addServiceForm}" class="btn-primary btn-sm mb-3"> Add a Service</a>
+
+    <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+
+    <tr>
+        <th>Supplier Name</th>
+        <th>TND Shipments</th>
+        <th>TND Value</th>
+        <th>DOCX Shipments</th>
+        <th>DOCX Value</th>
+        <th>ONX Shipments</th>
+        <th>ONX Value</th>
+        <th>ECX Shipments</th>
+        <th>ECX Value</th>
+        <th>RFX Shipments</th>
+        <th>RFX Value</th>
+        <th>SDX Shipments</th>
+        <th>SDX Value</th>
+        <th>INTL Doc Shipments</th>
+        <th>INTL Doc Value</th>
+        <th>INTL Parcel Shipments</th>
+        <th>INTL Parcel Volume</th>
+        <th colspan="2">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tempCourierServices : ${courierServices}">
+       <!-- <td th:text="${supplierName}"/> -->
+        <td th:text="${tempCourierServices.tenderVolume}"/>
+        <td th:text="${tempCourierServices.tenderValue}"/>
+        <td th:text="${tempCourierServices.documentVolume}"/>
+        <td th:text="${tempCourierServices.documentValue}"/>
+        <td th:text="${tempCourierServices.overnightVolume}"/>
+        <td th:text="${tempCourierServices.overnightValue}"/>
+        <td th:text="${tempCourierServices.economyVolume}"/>
+        <td th:text="${tempCourierServices.economyValue}"/>
+        <td th:text="${tempCourierServices.roadVolume}"/>
+        <td th:text="${tempCourierServices.roadValue}"/>
+        <td th:text="${tempCourierServices.sameDayVolume}"/>
+        <td th:text="${tempCourierServices.sameDayValue}"/>
+        <td th:text="${tempCourierServices.internationalDocVolume}"/>
+        <td th:text="${tempCourierServices.internationalDocValue}"/>
+        <td th:text="${tempCourierServices.internationalParcelVolume}"/>
+        <td th:text="${tempCourierServices.internationalParcelValue}"/>
+        <td>
+            <a th:href="@{/courierServices/update(courierServicesId = ${tempCourierServices.id})}" class="btn btn-info btn-sm">Update</a>
+
+        </td>
+        <td>
+            <a th:href="@{/courierServices/delete(courierServicesId = ${tempCourierServices.id})}" class="btn btn-danger btn-sm"
+               onclick="if(!(confirm('Are you sure you want to delete this service?'))) return false">Delete</a>
+        </td>
+    </tr>
+</tbody>
+    </table>
+ <hr>
+    <a th:href="@{/dashboard}">Back to Dashboard</a>
+
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,10 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://thymeleaf.org" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+
+    <title>Add Services</title>
+    <script th:replace="fragments/header :: headerElement"></script>
+    <script th:replace="fragments/navbar :: navbarElement"></script>
+    <!--Footer needs to be redesigned
+    <script th:replace="fragments/footer :: footerElement"></script>
+    -->
+
+
 </head>
 <body>
-$END$
+
+<div class="container">
+
+    <h3>Add Services</h3>
+    <hr>
+
+    <p class="h4 mb-4">Save A New Service</p>
+
+    <form action="#" th:action="@{/courierServices/save}" th:object="${courierServices}" method="POST">
+        <input type="hidden" th:field="*{id}">
+
+      <!-- <input type="text" th:field="*{supplierName}" class="form-control mb-4 w-25" placeholder="Supplier Name"/> -->
+
+        <input type="text" th:field="*{tenderVolume}" class="form-control mb-4 w-25" placeholder="Tender Volume"/>
+
+        <input type="text" th:field="*{tenderValue}" class="form-control mb-4 w-25" placeholder="Tender Value"/>
+
+        <input type="text" th:field="*{documentVolume}" class="form-control mb-4 w-25" placeholder="Document Volume"/>
+
+        <input type="text" th:field="*{documentValue}" class="form-control mb-4 w-25" placeholder="Document Value"/>
+
+        <input type="text" th:field="*{overnightVolume}" class="form-control mb-4 w-25" placeholder="Overnight Volume"/>
+
+        <input type="text" th:field="*{overnightValue}" class="form-control mb-4 w-25" placeholder="Overnight Value"/>
+
+        <input type="text" th:field="*{economyVolume}" class="form-control mb-4 w-25" placeholder="Economy Volume"/>
+
+        <input type="text" th:field="*{economyValue}" class="form-control mb-4 w-25" placeholder="Economy Value"/>
+
+        <input type="text" th:field="*{roadVolume}" class="form-control mb-4 w-25" placeholder="RFX Volume"/>
+
+        <input type="text" th:field="*{roadValue}" class="form-control mb-4 w-25" placeholder="RFX Value"/>
+
+        <input type="text" th:field="*{sameDayVolume}" class="form-control mb-4 w-25" placeholder="SDX Volume"/>
+
+        <input type="text" th:field="*{sameDayValue}" class="form-control mb-4 w-25" placeholder="SDX Value"/>
+
+        <input type="text" th:field="*{internationalDocVolume}" class="form-control mb-4 w-25" placeholder="INTL Doc Volume"/>
+
+        <input type="text" th:field="*{internationalDocValue}" class="form-control mb-4 w-25" placeholder="INTL Doc Value"/>
+
+        <input type="text" th:field="*{internationalParcelVolume}" class="form-control mb-4 w-25" placeholder="INTL Parcel Volume"/>
+
+        <input type="text" th:field="*{internationalParcelValue}" class="form-control mb-4 w-25" placeholder="INTL Parcel Value"/>
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/courierServices/list}">Back to Courier Services</a>
+    <hr>
+
+</div>
+
 </body>
 </html>

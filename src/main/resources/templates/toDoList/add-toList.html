@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List</title>
+    <script th:replace="fragments/header :: headerElement"></script>
+    <script th:replace="fragments/navbar :: navbarElement"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <br>
+    <br>
+    <br>
+    <h3>To Do List</h3>
+    <form action="#"  th:action="@{/savetodo}" th:object="${todolist}" method="POST">
+
+        <input type="hidden" th:field="*{id}">
+        <input type="text" th:field="*{category}" class="form-control mb-4 w-25" placeholder="Category">
+        <input type="text" th:field="*{item}" class="form-control mb-4 w-25" placeholder="Item Name">
+        <input type="text" th:field="*{description}" class="form-control mb-4 w-25" placeholder="Description">
+        <input type="date" th:field="*{dueDate}" class="form-control mb-4 w-25" placeholder="Due Date">
+        <input type="text" th:field="*{status}" class="form-control mb-4 w-25" placeholder="Status">
+
+        <button type="submit"  class="btn btn-info col-2">Save</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/dashboard}">Back to Dashboard</a>
+    <hr>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/files/list}"  method="POST" enctype="multipart/form-data">
+
+    <div>
+        <div>
+            <input type="file" name="files" webkitdirectory multiple>
+        </div>
+        <button class="btn btn-info btn-sm" type="submit">Upload</button>
+    </div>
+</form>
+
+</body>
+</html>

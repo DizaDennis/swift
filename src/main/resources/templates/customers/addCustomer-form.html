@@ -49,11 +49,20 @@
                        placeholder="151 Katherine Str...">
         </div>
 
-        <div class="col-12">
-            <label for="addressLine2" class="form-label">Address Line 2</label>
+        <div class="col-6">
+            <label for="addressLine2" class="form-label">Decision Maker</label>
                 <input type="text" th:field="*{decisionMaker}" class="form-control" id="addressLine2"
-                       placeholder="Vunani Business Park...">
+                       placeholder="John Doe...">
         </div>
+
+        <div class="col-6">
+
+            <label for="accountsPerson" class="form-label">Accounts Person</label>
+            <input type="text" th:field="*{accountsPerson}" class="form-control" id="accountsPerson"
+                   placeholder="Accounts Person">
+
+        </div>
+
 
         <div class="col-md-6">
             <label for="previousCourier" class="form-label">Previous Courier</label>
@@ -85,12 +94,17 @@
                    placeholder="Notes">
         </div>
 
+        <div class="col-md-6">
+        <label for="fileUpload">Upload CIPC Docs</label>
+        <input type="file" id="fileUpload" name="fileUpload" accept=".pdf,.doc,.docx" th:field="*{companyRegistrationDocs}"
+               class="form-control mb-4 w-25" placeholder="CIPC Docs">
+
+        </div>
+
+
         <!-- ======To revisit document Upload ===== >
-                <label for="fileUpload">Upload CIPC Docs</label>
-                <input type="file" id="fileUpload" name="fileUpload" accept=".pdf,.doc,.docx" th:field="*{companyRegistrationDocs}"
-                       class="form-control mb-4 w-25" placeholder="CIPC Docs">
-                        <input type="file" th:field="*{companyRegistrationDocs}"
-                       class="form-control mb-4 w-25" placeholder="CIPC Docs">
+               <input type="file" th:field="*{companyRegistrationDocs}"
+               class="form-control mb-4 w-25" placeholder="CIPC Docs">
 
                 <label for="fileUpload1">Credit App Docs</label>
                 <input type="file" id="fileUpload1" name="fileUpload1" accept=".pdf,.doc,.docx" th:field="*{creditApp}"

@@ -7,43 +7,91 @@
     $"{customer}" in the html form
     -->
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-          crossorigin="anonymous">
-    <title>Customer List</title>
 
-    <link href="assets/img/swiftFavicon.png" rel="icon">
+    <title>Customer List</title>
+    <script th:replace="fragments/header :: headerElement"></script>
+    <script th:replace="fragments/navbar :: navbarElement"></script>
+    <!--Footer needs to be redesigned
+    <script th:replace="fragments/footer :: footerElement"></script>
+    -->
+    <!--
+    <style>
+        .table-container {
+            width: 90%;
+            overflow-x: auto; /* Allows horizontal scrolling if the table is wider than the container */
+        }
+        table {
+            width: 90%;
+            min-width: 90px; /* Adjust this value based on your content to prevent wrapping */
+            border-collapse: collapse;
+        }
+        th, td {
+            padding-left: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+    </style>
+-->
+
+
 </head>
 <body>
 
-<div class="container">
+<div class="table-container">
     <br>
     <h3 class="card-title">Customers</h3>
     <br>
+
+    <a th:href="@{/targets/newTargetForm}" class="btn-primary btn-sm mb-3">Add Target</a>
+    <table class="table table-borderless datatable">
+        <thead>
+        <tr>
+            <th>Target Shipments</th>
+            <th>Target Customers</th>
+            <th>Target Revenue</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempTargets : ${targets}">
+            <td th:text="${tempTargets.targetShipments}"/>
+            <td th:text="${tempTargets.newCustomers}"/>
+            <td th:text="${tempTargets.targetRevenue}"/>
+
+            <td>
+                <a th:href="@{/targets/updateTargets(targetsId= ${tempTargets.id})}" class="btn btn-info btn-sm">Update</a>
+            </td>
+            <td>
+                <a th:href="@{/targets/delete(targetsId = ${tempTargets.id})}" class="btn btn-danger btn-sm"
+                   onclick="if(!(confirm('Are you sure you want to delete this target'))) return false">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
     <!--button to add a customer -->
     <a th:href="@{/customers/newCustomerForm}" class="btn-primary btn-sm mb-3">Add Customer</a>
 
     <!--Using the same table as prospects for now -->
-    <table class="table table-bordered table-striped">
+    <table class="table table-hover">
 
-        <thead class="table-dark">
+        <thead class="table-info">
         <tr>
             <th>Company Name</th>
             <th>Company Number</th>
             <th>Address</th>
             <th>Decision Maker</th>
+            <th>Accounts Person</th>
             <th>Previous Courier</th>
-           <!--
             <th>CIPC Docs</th>
+           <!--
+
             <th>Credit App</th>
             -->
-            <th>Open Invoices</th>
+            <th>Number of Shipments</th>
             <th>Open Invoice Value 'R'</th>
             <th>Current Month Billing 'R'</th>
             <th>Notes</th>
-            <th>Action</th>
+            <th colspan="2" style="text-align:center">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -52,14 +100,18 @@
                 <td th:text="${tempCustomer.companyNumber}"/>
                 <td th:text="${tempCustomer.address}"/>
                 <td th:text="${tempCustomer.decisionMaker}"/>
+                <td th:text="${tempCustomer.accountsPerson}"/>
                 <td th:text="${tempCustomer.previousCourier}"/>
-                <td th:text="${tempCustomer.openInvoices}"/>
-                <td th:text="${tempCustomer.openInvoiceValue}"/>
-                <td th:text="${tempCustomer.currentInvoiceValue}"/>
+                <td th:text="${tempCustomer.companyRegistrationDocs}"/>
+                <td th:text="${tempCustomer.currentMonthShipments}"/>
+                <td th:text=" 'R ' + ${tempCustomer.openInvoiceValue}"/>
+                <td th:text=" 'R ' +${tempCustomer.currentInvoiceValue}"/>
                 <td th:text="${tempCustomer.notes}"/>
 
             <td>
             <a th:href="@{/customers/updateCustomer(customerId=${tempCustomer.id})}" class="btn btn-info btn-sm">Update</a>
+                </td>
+            <td>
             <a th:href="@{/customers/deleteCustomer(customerId=${tempCustomer.id})}" class="btn btn-danger btn-sm"
             onclick="if(!(confirm('Are you sure you want to delete this Customer?'))) return false">Delete</a>
 

@@ -1,6 +1,11 @@
 package com.sales.swift.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /***
  * Customer entity class created to capture all customer info
@@ -9,28 +14,33 @@ import jakarta.persistence.*;
  * @author dennisdiza
  */
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "@id")
 public class Customer {
 
     private Long id;
     private String companyName;
     private String companyNumber;
     private String address;
+    private String accountsPerson;
     private String decisionMaker;
     private byte[] companyRegistrationDocs;
     private byte[] sarsDocs;
     private byte[] creditApp;
     private byte[] rateCard;
-    private String users;
-    private Integer openInvoiceValue;
+    private String users; // customer users
+    private Double openInvoiceValue;
     private String openInvoices;
-    private Integer currentInvoiceValue;
+    private Double currentInvoiceValue;
+    private Double currentMonthShipments;
     private Byte invoices; // for invoices that have been approved and sent to the customer
     private Byte statement; // for statements that have been approved and sent to the customer
-    private Integer totalBilling;
+    private Double totalBilling;
     private String previousCourier;
     private Prospect prospect;
     private String notes;
     private Boolean trading;
+    private Set<Comment> comments = new HashSet<>();
+    private User user;
 
 
     @Id
@@ -107,6 +117,14 @@ public class Customer {
         this.rateCard = rateCard;
     }
 
+    public Double getCurrentMonthShipments() {
+        return currentMonthShipments;
+    }
+
+    public void setCurrentMonthShipments(Double currentMonthShipments) {
+        this.currentMonthShipments = currentMonthShipments;
+    }
+
     public String getUsers() {
         return users;
     }
@@ -115,11 +133,11 @@ public class Customer {
         this.users = users;
     }
 
-    public Integer getOpenInvoiceValue() {
+    public Double getOpenInvoiceValue() {
         return openInvoiceValue;
     }
 
-    public void setOpenInvoiceValue(Integer openInvoiceValue) {
+    public void setOpenInvoiceValue(Double openInvoiceValue) {
         this.openInvoiceValue = openInvoiceValue;
     }
 
@@ -131,11 +149,11 @@ public class Customer {
         this.openInvoices = openInvoices;
     }
 
-    public Integer getCurrentInvoiceValue() {
+    public Double getCurrentInvoiceValue() {
         return currentInvoiceValue;
     }
 
-    public void setCurrentInvoiceValue(Integer currentInvoiceValue) {
+    public void setCurrentInvoiceValue(Double currentInvoiceValue) {
         this.currentInvoiceValue = currentInvoiceValue;
     }
 
@@ -156,11 +174,11 @@ public class Customer {
         this.statement = statement;
     }
 
-    public Integer getTotalBilling() {
+    public Double getTotalBilling() {
         return totalBilling;
     }
 
-    public void setTotalBilling(Integer totalBilling) {
+    public void setTotalBilling(Double totalBilling) {
         this.totalBilling = totalBilling;
     }
 
@@ -195,5 +213,29 @@ public class Customer {
 
     public void setTrading(Boolean trading) {
         this.trading = trading;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="customer")
+    public Set<Comment> getComment() {
+        return comments;
+    }
+
+    public void setComment(Set<Comment> comments) {
+        this.comments = comments;
+    }
+    @ManyToOne
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getAccountsPerson() {
+        return accountsPerson;
+    }
+
+    public void setAccountsPerson(String accountsPerson) {
+        this.accountsPerson = accountsPerson;
     }
 }

@@ -13,6 +13,12 @@
     scroll-behavior: smooth;
 }
 
+.logo-large{
+    width: max-content;
+    display: block;
+    height: max-content;
+}
+
 body {
     font-family: "Open Sans", sans-serif;
     background: #f6f9ff;

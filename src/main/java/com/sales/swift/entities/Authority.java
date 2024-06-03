@@ -1,7 +1,6 @@
-package com.sales.swift.security;
+package com.sales.swift.entities;
 
 
-import com.sales.swift.entities.User;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 

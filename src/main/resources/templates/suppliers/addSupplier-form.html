@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"  lang="en">
+<head>
+
+    <title> Add Supplier</title>
+    <script th:replace="fragments/header :: headerElement"></script>
+    <script th:replace="fragments/navbar :: navbarElement"></script>
+    <!--Footer needs to be redesigned
+    <script th:replace="fragments/footer :: footerElement"></script>
+    -->
+
+
+</head>
+<body>
+
+
+<div class="container">
+
+    <h3 class="card-title"> New Supplier</h3>
+    <hr>
+
+    <p class="h4 mb-4"> Save Supplier</p>
+    <form action="#" th:action="@{/suppliers/save}" th:object="${supplier}" method="POST">
+     <!-- Hidden field to include id for updating/deleting/prepopulating -->
+        <input type="hidden" th:field="*{id}">
+
+        <input type="text" th:field="*{supplierName}" class="form-control mb-4 w-25" placeholder="Company Name">
+
+        <input type="text" th:field="*{supplierAddress}" class="form-control mb-4 w-25" placeholder="Company Address">
+
+        <input type="text" th:field="*{repName}" class="form-control mb-4 w-25" placeholder="Sale Rep's Name">
+
+        <input type="text" th:field="*{repNumber}" class="form-control mb-4 w-25" placeholder="Sale Rep's Number">
+
+        <input type="text" th:field="*{repEmailAddress}" class="form-control mb-4 w-25" placeholder="Sale Rep's Email">
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+
+    <hr>
+    <a th:href="@{/suppliers/list}">Back to Suppliers</a>
+    <hr>
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Customer</title>
+ <!-- =============================== FRAGMENTS ============================== -->
+    <script th:replace="fragments/header :: headerElement"></script>
+    <script th:replace="fragments/navbar :: navbarElement"></script>
+    <!--Footer needs to be redesigned
+    <script th:replace="fragments/footer :: footerElement"></script>
+    -->
+</head>
+<body>
+
+<div class="container">
+    <h3>Comments</h3>
+    <hr>
+<form action="#" th:action="@{/customers/save}" th:object="${customer}" method="POST">
+    <input type="hidden" th:field="*{id}">
+
+
+
+
+
+
+
+</form>
+
+
+</div>
+
+</body>
+</html>

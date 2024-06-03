@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Project</title>
+    <script th:replace="fragments/header :: headerElement"></script>
+    <script th:replace="fragments/navbar :: navbarElement"></script>
+    <!--Footer needs to be redesigned
+    <script th:replace="fragments/footer :: footerElement"></script>
+    -->
+<body>
+
+    <div class="container">
+        <h3>New Project</h3>
+        <hr>
+
+        <p class="h4 mb-4">Save Project</p>
+        <form action="#" th:action="@{/projects/save}" th:object="${project}" method="POST">
+            <input type="hidden" th:field="*{id}">
+
+            <input type="text" th:field="*{companyName}" class="form-control mb-4 w-25" placeholder="Company Name">
+
+            <input type="text" th:field="*{projectName}" class="form-control mb-4 w-25" placeholder="Project Name">
+
+            <input type="text" th:field="*{projectType}" class="form-control mb-4 w-25" placeholder="Project Type">
+
+            <input type="text" th:field="*{projectDescription}" class="form-control mb-4 w-25" placeholder="Project Description">
+
+            <input type="text" th:field="*{projectStatus}" class="form-control mb-4 w-25" placeholder="Project Status">
+
+            <input type="text" th:field="*{notes}" class="form-control mb-4 w-25" placeholder="Notes">
+
+            <button type="submit" class="btn btn-info col-2">Save</button>
+
+        </form>
+
+        <hr>
+        <a th:href="@{/projects/list}">Return to Project List</a>
+        <hr>
+
+    </div>
+
+</body>
+</html>

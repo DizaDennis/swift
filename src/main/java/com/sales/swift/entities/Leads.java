@@ -1,9 +1,15 @@
 package com.sales.swift.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Leads")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "@id")
 public class Leads {
 
     private Long id;
@@ -14,6 +20,8 @@ public class Leads {
     private String currentSupplier;
     private String notes;
     private Prospect prospect;
+    private User user;
+    private Set<Comment> comments = new HashSet<>();
 
 
     @Id
@@ -81,6 +89,24 @@ public class Leads {
 
     public void setProspect(Prospect prospect) {
         this.prospect = prospect;
+    }
+
+    @ManyToOne
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "leads")
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
 

@@ -1,5 +1,7 @@
 package com.sales.swift.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "@id")
 public class Prospect {
 
     private Long id;
@@ -15,11 +18,10 @@ public class Prospect {
     private String contactPerson;
     private String emailAddress;
     private Set<Customer> customer = new HashSet<>();
-
     private String industry;
     private String website;
     private Integer parcelVolume;
-    private Integer monthlySpend;
+    private Double monthlySpend;
     private String currentSupplier;
     private Byte currentSupplierInvoice;
     private Date lastContactDate;
@@ -28,6 +30,9 @@ public class Prospect {
     private String notes;
     private Leads lead;
     private Boolean activeProspect; // If the prospect is not active -> they declined
+    private User user;
+    private Set<Comment> comments = new HashSet<>();
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -108,11 +113,11 @@ public class Prospect {
         this.parcelVolume = parcelVolume;
     }
 
-    public Integer getMonthlySpend() {
+    public Double getMonthlySpend() {
         return monthlySpend;
     }
 
-    public void setMonthlySpend(Integer monthlySpend) {
+    public void setMonthlySpend(Double monthlySpend) {
         this.monthlySpend = monthlySpend;
     }
 
@@ -176,6 +181,24 @@ public class Prospect {
     @OneToOne
     public Leads getLead() {
         return lead;
+    }
+
+    @ManyToOne
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+        @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "prospect")
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     public void setLead(Leads lead) {

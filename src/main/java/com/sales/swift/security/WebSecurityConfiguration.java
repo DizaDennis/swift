@@ -1,61 +1,56 @@
 package com.sales.swift.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.SecurityBuilder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
-/*
+
+/***
+ * Using this class to configure security instead of having to do it in XML
+ */
+
 @Configuration
-public class WebSecurityConfiguration implements WebSecurityConfigurer {
+public class WebSecurityConfiguration {
 
-    @Autowired
-    UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
     @Bean
-    PasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder getPasswordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
 
-protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-
-
-    auth
-                .userDetailsService(userDetailsService)
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.
+                userDetailsService(userDetailsService)
                 .passwordEncoder(getPasswordEncoder());
+    }
+    /*
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        return http
+                .csrf().disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/login").permitAll()
+                .anyRequest().hasRole("USER")
+             //   .requestMatchers("/admin").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic()
+                .and().build();
 
+
+    }
+*/
 }
-    protected void configure(HttpSecurity http) throws Exception{
-
-        http.authorizeHttpRequests()
-                .requestMatchers("/login.html").permitAll()
-                .requestMatchers("/admin").hasRole("ADMIN")
-                .anyRequest().hasRole("USER").and()
-                .formLogin(login -> login
-                        .loginPage("/login.html")
-                        .defaultSuccessUrl("/login.html")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .permitAll());
 
 
-    }
 
-    @Override
-    public void init(SecurityBuilder builder) throws Exception {
 
-    }
 
-    @Override
-    public void configure(SecurityBuilder builder) throws Exception {
-
-    }
 
 
 

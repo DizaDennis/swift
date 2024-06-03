@@ -1,13 +1,11 @@
 package com.sales.swift.security;
 
+import com.sales.swift.entities.Authority;
 import com.sales.swift.entities.User;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
-/*
+
 public class CustomSecurityUser extends User implements UserDetails {
 
     private static final long serialVersionUID = 2084617001526948919L;
@@ -25,37 +23,36 @@ public class CustomSecurityUser extends User implements UserDetails {
 
     @Override
     public Set<Authority> getAuthorities() {
-        return this.getAuthorities();
+        return super.getAuthorities();
     }
 
     @Override
     public String getPassword() {
-        return this.getPassword();
+        return super.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.getUsername();
+        return super.getUsername();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
-*/

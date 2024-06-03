@@ -13,7 +13,8 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,6 +28,7 @@
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -36,19 +38,21 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
-            <img src="" alt=""> <!-- Need to get a clear logo -->
-            <span class="d-none d-lg-block">SWIFT CRM</span>
+            <img src="/assets/img/logo1.png" class="logo-large" alt=""> <!-- Need to get a clear logo -->
+            <!-- <span class="d-none d-lg-block">SWIFT CRM</span> -->
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
+    <!--
+        <div class="search-bar">
+            <form class="search-form d-flex align-items-center" action="/logout"  method="POST">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
-    <div class="search-bar">
-        <form class="search-form d-flex align-items-center" action="/logout"  method="POST">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-
-            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-        </form>
-    </div><!-- End Search Bar -->
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
+        End Search Bar
+        -->
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -75,9 +79,9 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" th:href="@{/customers/list}">
                             <i class="bi bi-person"></i>
-                            <span>My Profile</span>
+                            <span>Customers</span>
                         </a>
                     </li>
                     <li>
@@ -85,9 +89,9 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" th:href="@{/prospects/list}">
                             <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
+                            <span>Prospects</span>
                         </a>
                     </li>
                     <li>
@@ -95,9 +99,9 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                        <a class="dropdown-item d-flex align-items-center" th:href="@{/leads}">
                             <i class="bi bi-question-circle"></i>
-                            <span>Need Help?</span>
+                            <span>Leads</span>
                         </a>
                     </li>
                     <li>
@@ -207,12 +211,11 @@
                                     <li class="dropdown-header text-start">
                                         <h6>Filter</h6>
                                     </li>
+                                    <li><a class="dropdown-item" th:href="@{/customers/list}">Update</a></li>
                                     <!-- This will be used at a later stage
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
                                     <li><a class="dropdown-item" href="#">This Month</a></li>
                                     <li><a class="dropdown-item" href="#">This Year</a></li>
                                     -->
-
                                 </ul>
                             </div>
 
@@ -226,7 +229,9 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6 th:text="${currentMonthShipments}"></h6>
-                                        <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                                        <span class="text-muted small pt-2 ps-1">Target Shipments: </span><span
+                                            class="text-success small pt-1 fw-bold" th:text="${targetShipments}"></span>
 
                                     </div>
                                 </div>
@@ -262,8 +267,10 @@
                                         <i class="bi-currency-dollar"></i>
                                     </div>
                                     <div class="ps-3">
-                                       <h6 th:text="${currentMonthRevenue}"></h6>
-                                        <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                                        <h6 th:text="${currentMonthRevenue}"></h6>
+                                        <span class="text-muted small pt-2 ps-1">Target Revenue:</span> <span
+                                            class="text-success small pt-1 fw-bold"
+                                            th:text="'R' + ${targetRevenue}"></span>
 
                                     </div>
                                 </div>
@@ -301,7 +308,8 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6 th:text="${customerCount}"></h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                                        <span class="text-muted small pt-2 ps-1">New Customer Target</span> <span
+                                            class="text-danger small pt-1 fw-bold" th:text="${newCustomers}"></span>
 
                                     </div>
                                 </div>
@@ -340,7 +348,8 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6 th:text="${prospectCount}"></h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span
+                                            class="text-muted small pt-2 ps-1">decrease</span>
 
                                     </div>
                                 </div>
@@ -380,7 +389,8 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6 th:text="${leadCount}"></h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span
+                                            class="text-muted small pt-2 ps-1">decrease</span>
 
                                     </div>
                                 </div>
@@ -420,7 +430,8 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6>3</h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span
+                                            class="text-muted small pt-2 ps-1">decrease</span>
 
                                     </div>
                                 </div>
@@ -451,24 +462,68 @@
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Overview <span>/Today</span></h5>
+                                <h5 class="card-title">Service Overview <span>/ Shipment Volume</span></h5>
 
                                 <!-- Line Chart -->
                                 <div id="reportsChart"></div>
-
-                                <script>
+                                <script th:inline="javascript">
+                                    /*<![CDATA[*/
                                     document.addEventListener("DOMContentLoaded", () => {
+
+                                        //Serialising shipment volume data to JSON
+                                        var overnightData = /*[[${overnightData}]]*/'[]';
+                                        var documentData =  /*[[${documentData}]]*/'[]';
+                                        var tenderData = /*[[${tenderData}]]*/'[]';
+                                        var economyData = /*[[${economyData}]]*/'[]';
+                                        var roadData = /*[[${roadData}]]*/'[]';
+                                        var sameDayData = /*[[${sameDayData}]]*/'[]';
+
+                                        //Serialising shipment Value data to JSON
+                                        var overnightValue = /*[[${overnightValue}]] */'[]';
+                                        var documentValue = /*[[${documentValue}]] */'[]';
+                                        var tenderValue = /*[[${tenderValue}]] */'[]';
+                                        var economyValue = /*[[${economyValue}]] */'[]';
+                                        var roadValue = /*[[${roadValue}]] */'[]';
+                                        var sameDayValue = /*[[${sameDayValue}]] */'[]';
+
+                                        //Need to then Parse JSON data
+                                        overnightData = JSON.parse(overnightData);
+                                        documentData = JSON.parse(documentData);
+                                        tenderData = JSON.parse(tenderData);
+                                        economyData = JSON.parse(economyData);
+                                        roadData = JSON.parse(roadData);
+                                        sameDayData = JSON.parse(sameDayData);
+
+                                        overnightValue = JSON.parse(overnightValue);
+                                        documentValue = JSON.parse(documentValue);
+                                        tenderValue = JSON.parse(tenderValue);
+                                        economyValue = JSON.parse(economyValue);
+                                        roadValue = JSON.parse(roadValue);
+                                        sameDayValue = JSON.parse(sameDayValue);
+
+
                                         new ApexCharts(document.querySelector("#reportsChart"), {
                                             series: [{
-                                                name: 'Sales',
-                                                data: [31, 40, 28, 51, 42, 82, 56],
+                                                name: 'Overnight',
+                                                data: [overnightData]
+
                                             }, {
-                                                name: 'Revenue',
-                                                data: [11, 32, 45, 32, 34, 52, 41]
+                                                name: 'Document',
+                                                data: [documentData]
                                             }, {
-                                                name: 'Customers',
-                                                data: [15, 11, 32, 18, 9, 24, 11]
+                                                name: 'Tender',
+                                                data: [tenderData]
+                                            }, {
+                                                name: 'Economy',
+                                                data: [economyData]
+                                            }, {
+                                                name: 'Road Freight',
+                                                data: [roadData]
+                                            }, {
+                                                name: 'Same Day',
+                                                data: [sameDayData]
                                             }],
+
                                             chart: {
                                                 height: 350,
                                                 type: 'area',
@@ -486,29 +541,44 @@
                                                     shadeIntensity: 1,
                                                     opacityFrom: 0.3,
                                                     opacityTo: 0.4,
-                                                    stops: [0, 90, 100]
+                                                    stops: [0, 50, 100]
                                                 }
                                             },
                                             dataLabels: {
-                                                enabled: false
+                                                enabled: true
                                             },
                                             stroke: {
                                                 curve: 'smooth',
                                                 width: 2
                                             },
+
                                             xaxis: {
-                                                type: 'datetime',
-                                                categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                                            },
+                                                type: 'numeric',
+                                                title: 'Shipment Value',
+                                                    overnightValue,
+                                                    documentValue,
+                                                    tenderValue,
+                                                    economyValue,
+                                                    roadValue,
+                                                    sameDayValue,
+
+                                            }
+                                            /*
                                             tooltip: {
                                                 x: {
-                                                    format: 'dd/MM/yy HH:mm'
+                                                    format: ''
                                                 },
+
                                             }
+
+                                             */
+
                                         }).render();
                                     });
+                                    /*]]>*/
                                 </script>
                                 <!-- End Line Chart -->
+
 
                             </div>
 
@@ -531,55 +601,39 @@
                                     <li><a class="dropdown-item" href="#">This Year</a></li>
                                 </ul>
                             </div>
-
+                            <!-- =======================               To Do List               =================================================================================================== -->
                             <div class="card-body">
                                 <h5 class="card-title">To do List </h5>
+                                <a th:href="@{/addtodo}" class="btn-primary btn-sm mb-3">Add To List</a>
 
                                 <table class="table table-borderless datatable">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Item</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Status</th>
+                                        <th>Item</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row"><a href="#">#2457</a></th>
-                                        <td>Brandon Jacob</td>
-                                        <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                                        <td>$64</td>
-                                        <td><span class="badge bg-success">Approved</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#">#2147</a></th>
-                                        <td>Bridie Kessler</td>
-                                        <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                                        <td>$47</td>
-                                        <td><span class="badge bg-warning">Pending</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#">#2049</a></th>
-                                        <td>Ashleigh Langosh</td>
-                                        <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                                        <td>$147</td>
-                                        <td><span class="badge bg-success">Approved</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#">#2644</a></th>
-                                        <td>Angus Grady</td>
-                                        <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                                        <td>$67</td>
-                                        <td><span class="badge bg-danger">Rejected</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#">#2644</a></th>
-                                        <td>Raheem Lehner</td>
-                                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                        <td>$165</td>
-                                        <td><span class="badge bg-success">Approved</span></td>
+                                    <tr th:each="tempList : ${todolist}">
+
+                                        <td th:text="${tempList.item}"/>
+                                        <!--  <td><span class="badge bg-success">Approved</span></td> -->
+
+                                        <td th:text="${tempList.category}"/>
+                                        <!--  <td><span class="badge bg-warning">Pending</span></td> -->
+
+                                        <td th:text="${tempList.description}"/>
+
+
+                                        <td th:text="${#date.format(tempList.dueDate,'dd-MM-yyyy')}"/>
+                                        <!--   <td><span class="badge bg-danger">Rejected</span></td> -->
+
+                                        <td th:text="${tempList.status}"/>
+
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -612,23 +666,32 @@
                     </div>
 
                     <div class="card-body">
-                        <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+                        <h5 class="card-title">Target Tracking <span>| Today</span></h5>
 
                         <div class="activity">
 
                             <div class="activity-item d-flex">
-                                <div class="activite-label">32 min</div>
-                                <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                                <div class="text-success">Profit / Loss:</div>
+                                <!-- <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i> -->
                                 <div class="activity-content">
-                                    Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                                    <h7 th:text="'R ' +${revenueTarget}"></h7>
                                 </div>
                             </div><!-- End activity item-->
 
                             <div class="activity-item d-flex">
-                                <div class="activite-label">56 min</div>
-                                <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+                                <div class="text-success">Revenue Target:</div>
+                                <!-- <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i> -->
                                 <div class="activity-content">
-                                    Voluptatem blanditiis blanditiis eveniet
+                                    <h7 th:text="'R ' +${revenueTarget}"></h7>
+                                </div>
+                            </div><!-- End activity item-->
+
+
+                            <div class="activity-item d-flex">
+                                <div class="text-success">Target Shipments</div>
+
+                                <div class="activity-content">
+                                    <h7 th:text="${targetShipmentsDifference}"></h7>
                                 </div>
                             </div><!-- End activity item-->
 
@@ -644,7 +707,8 @@
                                 <div class="activite-label">1 day</div>
                                 <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
                                 <div class="activity-content">
-                                    Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
+                                    Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a>
+                                    tempore
                                 </div>
                             </div><!-- End activity item-->
 
@@ -822,7 +886,6 @@
                 </div><!-- End Website Traffic -->
 
 
-
             </div><!-- End Right side columns -->
 
         </div>
@@ -844,7 +907,8 @@
     </div>
 </footer><!-- End Footer -->
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
 <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
