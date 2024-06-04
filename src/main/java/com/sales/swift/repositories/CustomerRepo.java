@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 /**
- * Customer Repo to interact with the DB and pull a list of customers in ascending order
+ * Customer Repo to interact with the DB
+ * Unlike the other repos, this includes custom methods required by the service classes
+ * @author dennisdiza
  */
 
 

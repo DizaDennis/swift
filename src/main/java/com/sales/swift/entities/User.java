@@ -7,6 +7,12 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Entity to keep track and manage the systems users
+ * @author dennisdiza 
+ */
+
+
 @Entity
 @Table(name="users")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "@id")

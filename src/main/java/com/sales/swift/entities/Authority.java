@@ -4,6 +4,10 @@ package com.sales.swift.entities;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
+/**
+ * Authority entity that will be used to set user roles
+ */
+
 @Entity
 public class Authority implements GrantedAuthority {
 

@@ -10,8 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+/**
+ * Controller to manage the courier services
+ * Implements the basic CRUD ops used in other sections but needs refinement
+ * @author dennisdiza
+ */
 
 @Controller
 @RequestMapping("/courierServices")

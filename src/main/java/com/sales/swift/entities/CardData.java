@@ -5,19 +5,22 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/***
+ * Basic Entity that will be used to set / pull data for the cards displayed in the dashboard
+ */
+
 @Entity
 public class CardData {
 
     private Long id;
     private Integer totalShipments;
-    private Integer totalRevenue;
+    private Double totalRevenue;
     private Integer numberOfCustomers;
     private Integer numberOfProspects;
     private Integer numberOfLeads;
     private Integer totalCount;
     private Integer previousMonthTotalCount;
     private Double percentageChange;
-
     private Integer numberOfProjects;
 
 
@@ -39,11 +42,11 @@ public class CardData {
         this.totalShipments = totalShipments;
     }
 
-    public Integer getTotalRevenue() {
+    public Double getTotalRevenue() {
         return totalRevenue;
     }
 
-    public void setTotalRevenue(Integer totalRevenue) {
+    public void setTotalRevenue(Double totalRevenue) {
         this.totalRevenue = totalRevenue;
     }
 

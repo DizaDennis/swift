@@ -9,6 +9,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Flow of data:
+ *  ProspectController <--> ProspectService <--> ProspectRepository <--> DB
+ * Controller class to manage all leads
+ * Follows the same basic structure as all controllers
+ * @author dennisdiza
+ */
+
 @Controller
 @RequestMapping("/leads")
 public class LeadsController {

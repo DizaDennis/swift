@@ -6,6 +6,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Set;
 
+/**
+ * Custom user initially used instead of allowing a registration process
+ * A general refactoring is required to avoid manually user/account creation
+ * @author dennisdiza
+ */
+
 public class CustomSecurityUser extends User implements UserDetails {
 
     private static final long serialVersionUID = 2084617001526948919L;

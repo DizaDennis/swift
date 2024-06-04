@@ -4,6 +4,13 @@ import jakarta.persistence.*;
 
 import java.util.Set;
 
+/**
+ * Target entity created to keep track of performance
+ * Values are pulled and displayed on the dashboard
+ * @author dennisdiza
+ */
+
+
 @Entity
 public class Targets {
 

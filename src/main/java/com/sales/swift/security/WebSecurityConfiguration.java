@@ -11,7 +11,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 /***
- * Using this class to configure security instead of having to do it in XML
+ * Incomplete security config class instead of having to use XML
+ * Uses BCrypt to encrypt passwords in the DB
+ * This class can be used to set RBAC
+ * @author dennisdiza
  */
 
 @Configuration

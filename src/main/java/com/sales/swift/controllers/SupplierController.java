@@ -9,6 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * Flow of data:
+ *  ProspectController <--> ProspectService <--> ProspectRepository <--> DB
+ *  Class to manage courier suppliers
+ */
 @Controller
 @RequestMapping("/suppliers")
 public class SupplierController {

@@ -9,6 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Comment class will be used by different entities that will use implement a comment section
+ * Customer/Prospects/Projects may implement their own comment sections
+ * @author dennisdiza
+ */
+
+
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "@id")
 public class Comment {

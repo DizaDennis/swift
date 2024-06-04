@@ -7,6 +7,11 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Standard entity class to manage leads
+ * Leads require less detail - relevant detail will be added once moved to prospects/customers
+ */
+
 @Entity
 @Table(name = "Leads")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "@id")

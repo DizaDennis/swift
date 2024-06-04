@@ -3,7 +3,8 @@ package com.sales.swift.entities;
 import jakarta.persistence.*;
 
 /**
- *Intermediary class for Supplier / Courier Services
+ *Intermediary class for Supplier / Courier Services to link them to each other
+ * @author dennisdiza
  */
 
 

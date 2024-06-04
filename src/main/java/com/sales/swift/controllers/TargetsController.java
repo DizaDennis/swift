@@ -11,6 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Flow of data:
+ *  ProspectController <--> ProspectService <--> ProspectRepository <--> DB
+ *  Created primarily to work the data required to populate the dashboard view
+ *  Follow the same basic structure as the rest of the controller classes
+ * @author dennisdiza
+ */
+
 @Controller
 @RequestMapping("/targets")
 public class TargetsController {

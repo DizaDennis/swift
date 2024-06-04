@@ -5,6 +5,12 @@ import jakarta.persistence.*;
 
 import java.util.Set;
 
+/**
+ * Supplier entity to capture courier partners details
+ * TODO: Include signed credit app, rates and invoices
+ * @author dennisdiza
+ */
+
 @Entity
 public class Supplier {
 

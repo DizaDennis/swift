@@ -10,6 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * Flow of data:
+ *  ProspectController <--> ProspectService <--> ProspectRepository <--> DB
+ * Controller to manage all customers
+ * Implements basic CRUD, leveraging the relevant classes
+ * @author dennisdiza
+ */
+
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
@@ -17,7 +25,10 @@ public class CustomerController {
     private CustomerService customerService;
     private TargetsService targetsService;
 
-    @Autowired //Optional because there's only 1 constructor
+    /*
+      Annotation is Optional because there's only 1 constructor
+     */
+    @Autowired
     public CustomerController(CustomerService theCustomerService, TargetsService theTargetsService) {
         customerService = theCustomerService;
         targetsService = theTargetsService;
@@ -31,9 +42,8 @@ public class CustomerController {
         //adding the list of customers to the model
         theModel.addAttribute("customer",theCustomer);
 
-
+        //Code that is used to populate the target section on the dashboard
         List<Targets> theTargets = targetsService.findAll();
-
         theModel.addAttribute("targets",theTargets);
 
         return "customers/customer-list";
@@ -52,7 +62,7 @@ public class CustomerController {
     /*
     Code to update the customer -> same approach as updating a prospect
      customerId is brought in by (customerId=${tempCustomer.id}) in the frontend
-     @RequestParam takes in customerId and uses it to search the DB
+     @RequestParam takes in customerId from the view and uses it to search the DB
      */
     @GetMapping("/updateCustomer")
     public String updateCustomer(@RequestParam("customerId")Long theId, Model theModel){
@@ -67,12 +77,17 @@ public class CustomerController {
 
     }
 
+    /*
+    @RequestParam is used to pull data from the view
+    Method takes in the "customerId" to perform the required tasks - interacting with the DB
+     */
     @GetMapping("/deleteCustomer")
     public String deleteCustomer(@RequestParam("customerId") Long theId){
 
         customerService.deleteById(theId);
 
-        return "redirect:/customers/list"; //redirecting to the /customers/list endpoint
+        //redirecting to the /customers/list endpoint
+        return "redirect:/customers/list";
     }
 
     @PostMapping("/save")

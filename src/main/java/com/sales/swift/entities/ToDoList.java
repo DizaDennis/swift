@@ -5,6 +5,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+/**
+ * Entity to keep track of important tasks
+ * Uses the dashboard view
+ * @author dennisdiza
+ */
+
 @Entity
 public class ToDoList {
 

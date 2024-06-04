@@ -4,6 +4,13 @@ import jakarta.persistence.*;
 
 import java.util.Set;
 
+/**
+ * Courier services class keeps track of the services provided to / by SWIFT
+ * Keeping record of both the volume and value of the services
+ *
+ * @author dennisdiza
+ */
+
 @Entity
 public class CourierServices {
 

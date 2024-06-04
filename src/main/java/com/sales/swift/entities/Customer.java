@@ -10,7 +10,7 @@ import java.util.Set;
 /***
  * Customer entity class created to capture all customer info
  * Company docs can be saved to keep all account related items in one place
- *
+ * Customer entity will allow user to capture and view detailed info on the customer
  * @author dennisdiza
  */
 @Entity

@@ -2,6 +2,14 @@ package com.sales.swift.entities;
 
 import jakarta.persistence.*;
 
+/**
+ * Entity initially created to manage Files
+ * Files may be managed in the individual classes instead of having a separate class
+ *
+ * @author dennisdiza
+ */
+
+
 @Entity
 @Table(name = "filemodal")
 public class FileModal {

@@ -8,6 +8,11 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Standard entity class to capture prospects details
+ * @author dennisdiza
+ */
+
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "@id")
 public class Prospect {

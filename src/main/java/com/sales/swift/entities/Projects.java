@@ -8,6 +8,11 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Projects entity is to capture and track unique projects or customers
+ * Examples include SMEgo, SIXTY60 and others
+ */
+
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "@id")
 public class Projects {
